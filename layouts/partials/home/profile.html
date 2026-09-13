@@ -1,0 +1,22 @@
+<div class="home">
+    <div class="info">
+        <div class="intro">
+            <h1>{{ .Title }}</h1>
+            <small>{{ .Site.Params.authorDescription | markdownify }}</small>
+            <p>{{ .Site.Params.info | markdownify }}</p>
+        </div>
+
+        {{ with .Site.Params.avatarURL }}
+        {{- $avatarURL := . | relURL -}}
+        {{- with resources.Get (strings.TrimPrefix "/" .) -}}
+        {{- $avatarURL = .RelPermalink -}}
+        {{- end -}}
+        <div class="avatar"><img src="{{ $avatarURL }}" alt="{{ $.Site.Params.author }}" loading="eager" decoding="async" fetchpriority="high"></div>
+        {{ end }}
+    </div>
+
+    <div class="latest">
+        {{ partial "home/latest.html" . }}
+    </div>
+
+</div>

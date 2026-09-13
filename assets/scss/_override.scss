@@ -1,0 +1,69 @@
+body, a, span, p, h1, h2, h3, h4, h5, h6 {
+  font-family: "Newsreader", "Georgia", sans-serif !important;
+}
+
+.home {
+  margin: 0 auto;
+
+  .info {
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    margin: 4rem 0;
+
+    .intro {
+      margin-top: 2.5rem;
+      height: unset;
+      float: unset;
+      width: unset;
+
+      h1 {
+        margin-bottom: 35px;
+        // font-size: 4.2rem;
+        font-size: 9rem;
+        font-weight: 700;
+        // line-height: 4.6rem;
+        line-height: 0.9rem;
+        font-family: "League Spartan" !important;
+        -webkit-text-stroke: 2px;
+        -webkit-text-fill-color: white;
+      }
+    }
+
+    .avatar {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.blog-single {
+  max-width: 72rem;
+}
+
+.notfound {
+  margin: 20rem 0;
+}
+
+[data-dark-mode] .home {
+  .info .intro {
+    h1 {
+      color: transparent !important;
+      -webkit-text-stroke-color: white !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+  }
+}
+
+[data-dark-mode] body .blog-card {
+  // background: $dark-card-bg;
+  background: transparent;
+}
+

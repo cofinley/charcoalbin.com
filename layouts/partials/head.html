@@ -1,0 +1,38 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ block "title" . }}{{ .Title }}{{ end }}</title>
+
+    {{- /* Meta */}}
+    <meta charset="utf-8">
+    {{- $description := site.Params.description | default site.Title -}}
+    {{- with .Description }}{{ $description = . }}{{ else }}{{ if or .IsPage .IsSection }}{{ $description = .Summary | default (printf "%s - %s" .Title site.Title) }}{{ end }}{{ end -}}
+    <meta name="description" content="{{ $description | plainify }}">
+    <meta name="author" content="{{ site.Params.author }}">
+    <link rel="canonical" href="{{ if .Params.canonicalURL -}} {{ trim .Params.canonicalURL " " }} {{- else -}} {{ .Permalink }} {{- end }}">
+    {{- if site.Params.analytics.google.SiteVerificationTag }}
+        <meta name="google-site-verification" content="{{ site.Params.analytics.google.SiteVerificationTag }}">
+    {{- end }}
+
+    {{- with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">
+    {{- end }}
+
+    <!-- {{ partial "common/analytics.html" . }} -->
+    {{ partial "common/extensions.html" . }}
+    {{ partial "common/icon.html" . }}
+    {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
+    {{ if or .Params.mermaid (and .Content (findRE "language-mermaid" .Content 1)) }}{{ partial "mermaid.html" . }}{{ end }}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+
+    {{ $cssOpts := dict "targetPath" "css/main.css" "transpiler" "dartsass" }}
+    {{ $styles := resources.Get "/scss/app.scss" | css.Sass $cssOpts | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
+
+    {{ if .Site.Params.options.showDarkMode -}}
+        {{ $darkModeInit := resources.Get "js/darkmode-init.js" | js.Build (dict "params" (dict "darkModeTheme" (site.Params.darkModeTheme | default "data-dark-mode"))) | minify -}}
+        <script>{{ $darkModeInit.Content | safeJS }}</script>
+    {{ end -}}
+</head>

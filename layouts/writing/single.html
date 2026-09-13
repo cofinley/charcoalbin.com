@@ -1,0 +1,37 @@
+{{ define "content" }}
+<article class="blog-single">
+  <header class="blog-title">
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  {{ partial "blog/meta.html" . }}
+
+  {{ partial "blog/article-content.html" . }}
+
+  {{ partial "blog/paginator.html" . }}
+
+  {{ $showRelated := true }}
+  {{ if isset site.Params.article "related" }}{{ $showRelated = site.Params.article.related }}{{ end }}
+  {{ if isset .Params "related" }}{{ $showRelated = .Params.related }}{{ end }}
+  {{ $related := .Site.RegularPages.Related . | first 5 }}
+  {{ if and $showRelated $related }}
+  <aside class="related-resources">
+    <h2>{{ i18n "related_resources" }}</h2>
+    <ul>
+    {{ range $related }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+    </ul>
+  </aside>
+  {{ end }}
+
+  {{ partial "blog/series.html" . }}
+  {{ $showComments := true }}
+  {{ if isset site.Params.article "comments" }}{{ $showComments = site.Params.article.comments }}{{ end }}
+  {{ if isset .Params "comments" }}{{ $showComments = .Params.comments }}{{ end }}
+  {{ if $showComments }}
+    {{ partial "common/utteranc.html" . }}
+    {{ partial "common/giscus.html" . }}
+  {{ end }}
+</article>
+{{ end }}

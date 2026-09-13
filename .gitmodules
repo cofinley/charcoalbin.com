@@ -1,0 +1,3 @@
+[submodule "themes/spoon"]
+	path = themes/spoon
+	url = https://github.com/noneback/hugo-theme-spoon
