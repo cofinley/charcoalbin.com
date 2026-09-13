@@ -1,0 +1,40 @@
+baseURL = 'https://charcoalbin.com/'
+locale = 'en-us'
+title = 'charcoal bin'
+theme = 'spoon'
+
+[menus]
+  [[menus.main]]
+    name = 'Writing'
+    pageRef = '/writing'
+    weight = 10
+  [[menus.main]]
+    name = 'Art'
+    pageRef = '/art'
+    weight = 20
+  [[menus.main]]
+    name = 'Tags'
+    pageRef = '/tags'
+    weight = 30
+
+[params]
+  brand = 'Home'
+  description = ' '
+  avatarURL = '/images/colors.png'
+  # author = 'Charcoal Bin'
+  authorDescription = ' '
+  info = 'How about going slow for a change?'
+  favicon = '/images/colors.png'
+  darkModeTheme = 'data-dark-mode' # or icy-dark-mode
+  [params.options]
+    showDarkMode = true
+    enableImgZooming = true
+    showMetaTags = true
+    enableMultiLang = false
+
+  [params.article]
+    toc = false
+    readingProgress = false
+
+[taxonomies]
+  tag = 'tags'

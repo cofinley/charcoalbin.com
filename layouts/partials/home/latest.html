@@ -1,0 +1,17 @@
+{{ $latest := where .Site.RegularPages "Section" "writing" | first 5 }}
+{{ if $latest }}
+  <h2>Latest</h2>
+{{ end }}
+<div class="latest-list">
+  {{ range $latest }}
+    <article class="latest-single">
+        <h4><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h4>
+        {{ partial "blog/meta.html" . }}
+        {{ with .Params.description }}
+          <p>{{ . }}</p>
+        {{ else }}
+          <p>{{ .Summary | plainify | truncate 200 }}</p>
+        {{ end }}
+    </article>
+  {{ end -}}
+</div>

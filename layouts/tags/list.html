@@ -1,0 +1,24 @@
+{{ define "content" }}
+
+<div class="card-wrapper">
+
+  <div class="tags">
+
+    <h1>{{ .Title }}</h1>
+
+    <ul class="tags-list">
+      {{- $type := .Type }}
+      {{- range $key, $value := .Data.Terms.Alphabetical }}
+      {{- $name := .Name }}
+      {{- $count := .Count }}
+      {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Name }}<small>({{ $count }})</small></a>
+      </li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+</div>
+
+{{- end }}

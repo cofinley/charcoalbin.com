@@ -1,0 +1,32 @@
+{{ define "content" }}
+<div class="blog-wrapper">
+  <div>
+    <h1>{{ .Title }}</h1>
+    <div class="blog-list">
+      {{ range .Paginator.Pages }}
+        <article>
+          <div class="blog-card">
+              <h3><a href="{{ .RelPermalink }}">{{ .Params.title }}</a></h3>
+              {{ partial "blog/meta.html" . }}
+              {{ with .Params.description }}
+                <p>{{ . }}</p>
+              {{ else }}
+                <p>{{ .Summary | plainify | truncate 200 }}</p>
+              {{ end }}
+          </div>
+        </article>
+      {{ end -}}
+    </div>
+    {{ if gt .Paginator.TotalPages 1 }}
+    <div class="paginator">
+      {{ if .Paginator.HasPrev }}
+      <a class="prev" href="{{ .Paginator.Prev.URL }}">&larr;&nbsp;&nbsp;{{ i18n "prev_page" }}</a>
+      {{ end }}
+      {{ if .Paginator.HasNext }}
+      <a class="next" href="{{ .Paginator.Next.URL }}">{{ i18n "next_page" }}&nbsp;&nbsp;&rarr;</a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

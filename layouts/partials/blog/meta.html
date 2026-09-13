@@ -1,0 +1,16 @@
+<p class="blog-meta">
+  <small>
+    {{ .Date | time.Format ":date_long" }}&nbsp;
+  </small>
+
+  {{ if .Site.Params.options.showMetaTags -}}
+    <small>
+      {{ with .GetTerms "tags"}}
+      ·
+      {{ end }}
+      {{ range (.GetTerms "tags") }}
+      <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+      {{ end }}
+    </small>
+  {{ end }}
+</p>
