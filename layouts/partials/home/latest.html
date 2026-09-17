@@ -1,4 +1,4 @@
-{{ $latest := where .Site.RegularPages "Section" "writing" | first 5 }}
+{{ $latest := where .Site.RegularPages "Params.date" "ne" nil | first 5 }}
 {{ if $latest }}
   <h2>Latest</h2>
 {{ end }}

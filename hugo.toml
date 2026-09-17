@@ -2,6 +2,7 @@ baseURL = 'https://charcoalbin.com/'
 locale = 'en-us'
 title = 'charcoal bin'
 theme = 'spoon'
+uglyURLs = true
 
 [menus]
   [[menus.main]]

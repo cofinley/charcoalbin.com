@@ -2,6 +2,12 @@ body, a, span, p, h1, h2, h3, h4, h5, h6 {
   font-family: "Newsreader", "Georgia", sans-serif !important;
 }
 
+.blog-single {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "League Spartan", serif !important;
+  }
+}
+
 .home {
   margin: 0 auto;
 
@@ -50,6 +56,10 @@ body, a, span, p, h1, h2, h3, h4, h5, h6 {
 
 .notfound {
   margin: 20rem 0;
+}
+
+.blog-content {
+  white-space: break-spaces;
 }
 
 [data-dark-mode] .home {
